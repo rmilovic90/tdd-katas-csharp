@@ -1,7 +1,10 @@
+using TddKatas.Banking.Adapters;
+using TddKatas.Banking.Application.Services;
 using TddKatas.Banking.Fakes;
 using Xunit;
 
 using static TddKatas.Banking.Fakes.FakeConsole;
+using static TddKatas.Banking.Fakes.FakeDateProvider;
 
 namespace TddKatas.Banking.Features
 {
@@ -13,7 +16,10 @@ namespace TddKatas.Banking.Features
 		public PrintStatement()
 		{
 			console = AFakeConsole;
-			account = new Account(console);
+			account = new Account(
+				AFakeDateProvider,
+				new InMemoryTransactionsStore(),
+				console);
 		}
 
 		[Fact]

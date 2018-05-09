@@ -1,4 +1,4 @@
-namespace TddKatas.Banking
+namespace TddKatas.Banking.Ports
 {
 	public interface IAmConsole
 	{
