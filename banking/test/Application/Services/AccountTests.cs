@@ -23,7 +23,7 @@ namespace TddKatas.Banking.Application.Services
 			console = AFakeConsole;
 			account = new Account(
 				AFakeDateProvider
-					.ForTodaysDateReturns(ADate),
+					.WhenAskedForTodaysDateReturns(ADate),
 				transactionsStore,
 				console);
 		}

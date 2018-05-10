@@ -1,6 +1,7 @@
 using FakeItEasy;
 using TddKatas.Banking.Ports;
 using System;
+using System.Collections.Generic;
 
 namespace TddKatas.Banking.Fakes
 {
@@ -11,6 +12,8 @@ namespace TddKatas.Banking.Fakes
 
 		private readonly IProvideDate mockDateProvider;
 
+		private readonly List<DateTime> preConfiguredDateResponses = new List<DateTime>();
+
 		private FakeDateProvider()
 		{
 			mockDateProvider = A.Fake<IProvideDate>();
@@ -19,13 +22,18 @@ namespace TddKatas.Banking.Fakes
 				.Returns(DateTime.Today);
 		}
 
-		public FakeDateProvider ForTodaysDateReturns(DateTime date)
+		public FakeDateProvider WhenAskedForTodaysDateReturns(DateTime date)
 		{
+			preConfiguredDateResponses.Add(date);
+
 			A.CallTo(() => mockDateProvider.TodaysDate)
-				.Returns(date);
+				.ReturnsNextFromSequence(preConfiguredDateResponses.ToArray());
 
 			return this;
 		}
+
+		public FakeDateProvider ThenReturns(DateTime date) =>
+			WhenAskedForTodaysDateReturns(date);
 
 		public DateTime TodaysDate => mockDateProvider.TodaysDate;
 	}
