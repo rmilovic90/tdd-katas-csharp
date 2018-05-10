@@ -19,10 +19,20 @@ namespace TddKatas.Banking.Fakes
 			consoleMock.WriteALineOf(text);
 		}
 
-		public void HasWroteALineOf(string text)
+		public void HasWroteLinesInOrderOf(params string[] texts)
 		{
-			A.CallTo(() => consoleMock.WriteALineOf(text))
-				.MustHaveHappenedOnceExactly();
+			var orderedAssertion = A.CallTo(() => consoleMock.WriteALineOf(texts[0]))
+				.MustHaveHappenedOnceExactly()
+				// HACK: workaround for ordered assertions on a array of values
+				.Then(A.CallTo(() => consoleMock.WriteALineOf(""))
+						.MustHaveHappened(Repeated.Never));
+
+			for (int index = 1; index < texts.Length; index++)
+			{
+				orderedAssertion.Then(
+					A.CallTo(() => consoleMock.WriteALineOf(texts[index]))
+						.MustHaveHappenedOnceExactly());
+			}
 		}
 	}
 }

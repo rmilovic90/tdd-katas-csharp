@@ -1,4 +1,5 @@
 using TddKatas.Banking.Domain.Models;
+using TddKatas.Banking.Domain.Services;
 using TddKatas.Banking.Ports;
 using System;
 
@@ -37,7 +38,10 @@ namespace TddKatas.Banking.Application.Services
 
 		public void PrintStatement()
 		{
-			throw new NotImplementedException();
+			var allTransactions = transactionsStore.All;
+
+			var statementPrinter = new StatementPrinter(console);
+			statementPrinter.PrintFor(allTransactions);
 		}
 	}
 }
