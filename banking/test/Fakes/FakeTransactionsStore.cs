@@ -1,6 +1,7 @@
 using FakeItEasy;
 using TddKatas.Banking.Domain.Models;
 using TddKatas.Banking.Ports;
+using System.Collections.Generic;
 
 namespace TddKatas.Banking.Fakes
 {
@@ -14,7 +15,13 @@ namespace TddKatas.Banking.Fakes
 		private FakeTransactionsStore()
 		{
 			transactionsStoreMock = A.Fake<IStoreTransactions>();
+
+			A.CallTo(() => transactionsStoreMock.All)
+				.Returns(new List<Transaction>());
 		}
+
+		public IReadOnlyList<Transaction> All =>
+			transactionsStoreMock.All;
 
 		public void SaveNew(Transaction transaction)
 		{

@@ -32,9 +32,9 @@ namespace TddKatas.Banking.Features
 			account.PrintStatement();
 
 			console.HasWroteALineOf("DATE | AMOUNT | BALANCE");
-			console.HasWroteALineOf("10/04/2014 | 500.00 | 1400.00");
-			console.HasWroteALineOf("02/04/2014 | -100.00 | 900.00");
-			console.HasWroteALineOf("01/04/2014 | 1000.00 | 1000.00");
+			console.HasWroteALineOf("05/09/2018 | 500.00 | 1400.00");
+			console.HasWroteALineOf("05/10/2018 | -100.00 | 900.00");
+			console.HasWroteALineOf("05/11/2018 | 1000.00 | 1000.00");
 		}
 	}
 }
