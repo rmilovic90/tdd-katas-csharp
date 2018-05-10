@@ -27,7 +27,7 @@ namespace TddKatas.Banking.Application.Services
 			transactionsStore.HasSavedNew(
 				ATransaction
 					.On(ADate)
-					.For(-1000.00m));
+					.For(1000.00m));
 		}
 	}
 }

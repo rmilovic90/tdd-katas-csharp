@@ -26,7 +26,7 @@ namespace TddKatas.Banking.Application.Services
 		public void Deposit(decimal amount)
 		{
 			var date = dateProvider.TodaysDate;
-			var transaction = new Transaction(date, -amount);
+			var transaction = new Transaction(date, amount);
 			transactionsStore.SaveNew(transaction);
 		}
 
