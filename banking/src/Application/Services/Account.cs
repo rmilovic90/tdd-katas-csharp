@@ -25,14 +25,14 @@ namespace TddKatas.Banking.Application.Services
 
 		public void Deposit(decimal amount)
 		{
-			var date = dateProvider.TodaysDate;
-			var transaction = new Transaction(date, amount);
+			var transaction = new Transaction(dateProvider.TodaysDate, amount);
 			transactionsStore.SaveNew(transaction);
 		}
 
 		public void Withdrawal(decimal amount)
 		{
-			throw new NotImplementedException();
+			var transaction = new Transaction(dateProvider.TodaysDate, -amount);
+			transactionsStore.SaveNew(transaction);
 		}
 
 		public void PrintStatement()
